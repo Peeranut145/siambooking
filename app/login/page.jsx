@@ -5,6 +5,9 @@ import Navbar from '../components/Navbar'
 import { signIn } from 'next-auth/react'
 import {useRouter} from 'next/navigation'
 
+
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 function registerPage() {
 
   const [email, setEmail] = useState("");
@@ -12,6 +15,11 @@ function registerPage() {
   const [error, setError] = useState("");
 
   const router = useRouter();
+  const {data: session } = useSession("");
+    if ( session ) router.replace("welcome");
+    
+ 
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

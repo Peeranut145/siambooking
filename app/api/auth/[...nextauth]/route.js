@@ -13,7 +13,7 @@ const authOptions = {
        const  { email, password } = credentials;
        try {
         await connectMongoDB();
-        const user = await User.findOne({ email});
+        const user = await User.findOne({ email });
 
         if (!user){
             return null;
@@ -35,7 +35,7 @@ const authOptions = {
    session: {
     strategy: "jwt",
    },
-   secrect: process.env.NEXTAUTH_SECRET,
+   secret: process.env.NEXTAUTH_SECRET,
    pages: {
     signIn: "/login"
    }
