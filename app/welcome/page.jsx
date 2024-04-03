@@ -2,8 +2,14 @@
 
 import React from 'react'
 import Navbar from '@/app/components/Navbar'
-
+import { useSession } from 'next-auth/react'
 export default function WelcomePage() {
+  
+  const { data: session } = useSession();
+  console.log(session);
+  
+  
+  
   return (
         <div>
             <Navbar/>
