@@ -25,7 +25,10 @@
   "mongoose": "^8.2.4",
   
     
-  "next-auth": "^4.24.7"
+  "next-auth": "^4.24.7",
+  
+    
+  "react-datepicker": "^6.6.0"
   
   },
   

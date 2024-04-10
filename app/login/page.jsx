@@ -40,10 +40,11 @@ function registerPage() {
   return (
     <div>
         <Navbar/>
-        <div className='container mx-auto py-5'>
-            <h3>Login</h3>
-            <hr className='my-3' />
-            <form onSubmit={handleSubmit}>
+        <div className='container mx-auto py-10'>
+          <div>
+             <h2  >Login</h2>
+            <hr />
+            <form onSubmit={handleSubmit} >
 
                 {error && ( 
                         <div className='bg-red-500 w-fit text-sm text-white py-1 px-3 rounded-md mt-2'>{error}</div>
@@ -51,10 +52,13 @@ function registerPage() {
                 
                 <input onChange={(e) => setEmail(e.target.value)}  className='block bg-gray-300 p-2 my-2 rounded-md' type="email" placeholder='Enter your Email' />
                 <input onChange={(e) => setPassword(e.target.value)} className='block bg-gray-300 p-2 my-2 rounded-md' type="password" placeholder='Enter your Password' />
-                <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Sign Up</button>
+                <div >
+                  <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Sign Up</button>
+                </div>
             </form>
             <hr className='my-3' />
             <p>Already have an accout ? go to <Link href="/register" className='text-blue-500 hover:underline'>register page</Link> </p>
+          </div> 
         </div>
 
     </div>
