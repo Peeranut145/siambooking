@@ -30,7 +30,7 @@ function registerPage() {
           setError("Invalid credentials.");
           return;
         }
-        router.replace("welcome")
+        router.replace("welcome")  //link page
         
     } catch(error){
       console.log(error)
