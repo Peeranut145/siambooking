@@ -12,10 +12,10 @@ const  bookingSchema = new Schema (
             required: false
         },
         adult: {
-            type: Int32Array,
+            type: int,
             required: true
         },
-        child:{  type: Int32Array,
+        child:{  type: int,
             required: true
         }
     },
