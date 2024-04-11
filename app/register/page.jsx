@@ -14,7 +14,7 @@ function registerPage() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const {data: session } = useSession("");
-    if ( session ) redirect("/welcome");
+    if ( session ) redirect("/booking");
     
     
     const handleSubmit = async (e) => {
@@ -63,6 +63,7 @@ function registerPage() {
 
             } else {
                 console.log("User registration failed")
+                setError("User registration failed");
             }
 
         }catch(error){

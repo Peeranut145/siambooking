@@ -16,7 +16,7 @@ function registerPage() {
 
   const router = useRouter();
   const {data: session } = useSession("");
-    if ( session ) router.replace("welcome");
+    if ( session ) router.replace("booking");
     
  
  
