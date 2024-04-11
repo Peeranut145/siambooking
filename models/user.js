@@ -14,6 +14,10 @@ const  userSchema = new Schema (
             type: String,
             required: true
         },
+        numbers: {
+            type: String,
+            required: true
+        },
         role: {
             type: String,
             required: false,

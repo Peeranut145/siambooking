@@ -9,6 +9,7 @@ function registerPage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [numbers, setNumbers] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -24,7 +25,7 @@ function registerPage() {
             setError("Password is not macth !");
             return;
         }
-        if (!name || !email || !password || !confirmPassword){
+        if (!name || !email || !password || !confirmPassword || !numbers){
             setError("Please complete all inputs !");
             return;
         }
@@ -49,7 +50,7 @@ function registerPage() {
                     "Content-Type" : "application/json"
                 },
                 body: JSON.stringify({
-                    name, email, password
+                    name, email, password, numbers
                 })
             })
 
@@ -91,6 +92,8 @@ function registerPage() {
                     <input onChange={(e) => setEmail(e.target.value)} className='block bg-gray-300 p-2 my-2 rounded-md' type="email" placeholder='Enter your Email' />
                     <input onChange={(e) => setPassword(e.target.value)}className='block bg-gray-300 p-2 my-2 rounded-md' type="password" placeholder='Enter your Password' />
                     <input onChange={(e) => setconfirmPassword(e.target.value)}className='block bg-gray-300 p-2 my-2 rounded-md' type="password" placeholder='Confirm  your Password' />
+                    <input onChange={(e) => setNumbers(e.target.value)}className='block bg-gray-300 p-2 my-2 rounded-md' type="text" placeholder='Confirm  your Numbers' />
+                    
                     <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Sign Up</button>
                 </form>
                 <hr className='my-3' />
