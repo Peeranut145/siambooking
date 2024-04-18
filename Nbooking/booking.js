@@ -1,6 +1,6 @@
 import mongoose, {Schema} from "mongoose";
 
-const  userSchema = new Schema (
+const  bookingSchema = new Schema (
     {
         id: {
             type: Number,
@@ -31,5 +31,5 @@ const  userSchema = new Schema (
     {timestamps: true}
 )
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
-export default User;
+const Booking = mongoose.Nbooking.User || mongoose.Nbooking("Booking", bookingSchema);
+export default Booking;
