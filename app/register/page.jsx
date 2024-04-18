@@ -30,7 +30,7 @@ function registerPage() {
             return;
         }
         try{                                       // API เป็นการยิง ข้อมูลไปที่ api/register/route
-            const resCheckUser = await fetch("http://localhost:3000/api/checkUsers",{  //ประกาศตัวแปลมารับค่าเพื่อ รองรับค่ารีเทรินที่ส่งไป
+            const resCheckUser = await fetch("api/checkUsers",{  //ประกาศตัวแปลมารับค่าเพื่อ รองรับค่ารีเทรินที่ส่งไป
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json" 
@@ -44,7 +44,7 @@ function registerPage() {
                 setError("User already exits !");
                 return;
             }
-            const res = await fetch("http://localhost:3000/api/register",{
+            const res = await fetch("api/register",{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"
