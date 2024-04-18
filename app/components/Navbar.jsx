@@ -4,7 +4,7 @@ import { signOut } from 'next-auth/react'
 
 export default function Navbar({session}) {
   return (
-    <nav className="bg-[#333] text-white p-5">
+    <nav className="bg-[#4873eb] text-white p-5">
         <div className="container mx-auto">
             <div className="flex justify-between item-center">
                 <div>

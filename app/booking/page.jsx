@@ -61,7 +61,7 @@ export default function BookingPage() {
             <Navbar session={session}/>
             <div className='container mx-auto py-5'>
             <div className=' px-50 '>
-                <h3>Booking Tour</h3>
+                <h3>Welcome to Booking :  {session?.user?.name}</h3>
                 <hr className='my-3' />
                 <form onSubmit={handleSubmit}>
 

@@ -41,23 +41,24 @@ function registerPage() {
     <div>
         <Navbar/>
         <div className='container mx-auto py-10'>
-          <div>
-             <h2  >Login</h2>
+          <div className='text-center items-center'>
+             <h2 className='text-4xl'>Login</h2>
             <hr />
             <form onSubmit={handleSubmit} >
 
                 {error && ( 
-                        <div className='bg-red-500 w-fit text-sm text-white py-1 px-3 rounded-md mt-2'>{error}</div>
+                        <div className='bg-red-500 w-fit text-sm text-white py-1 px-3 rounded-md mt-2 mx-auto'>{error}</div>
                 )}
                 
-                <input onChange={(e) => setEmail(e.target.value)}  className='block bg-gray-300 p-2 my-2 rounded-md' type="email" placeholder='Enter your Email' />
-                <input onChange={(e) => setPassword(e.target.value)} className='block bg-gray-300 p-2 my-2 rounded-md' type="password" placeholder='Enter your Password' />
+                <input onChange={(e) => setEmail(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md' type="email" placeholder='Enter your Email' />
+                <input onChange={(e) => setPassword(e.target.value)} className='block bg-gray-300 p-2 my-2 mx-auto rounded-md' type="password" placeholder='Enter your Password' />
                 <div >
                   <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Sign Up</button>
                 </div>
             </form>
-            <hr className='my-3' />
+            <p className='text-xs text-gray-500 my-2' >Forget Password ?  <Link href="/forget-password" className='text-blue-500 hover:underline'>Reset Here</Link> </p>
             <p>Already have an accout ? go to <Link href="/register" className='text-blue-500 hover:underline'>register page</Link> </p>
+            <hr className='my-3' />        
           </div> 
         </div>
 
