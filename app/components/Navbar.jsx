@@ -4,8 +4,9 @@ import { signOut } from 'next-auth/react'
 
 export default function Navbar({session}) {
   return (
-    <nav className="bg-[#4873eb] text-white p-5">
-        <div className="container mx-auto">
+    <nav className="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-5">
+        <div className="container mx-auto ">
+            
             <div className="flex justify-between item-center">
                 <div>
                     <Link href = "/">Booking</Link>

@@ -24,7 +24,15 @@ const  userSchema = new Schema (
             type: String,
             required: false,
             default: "user"
-        }
+        },
+        resetToken: {
+            type: String,
+            required: false,
+        },
+        resetTokenExpiry: {
+            type: Date,
+            required: false,
+        },
     },
     {timestamps: true}
 )

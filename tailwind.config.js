@@ -10,7 +10,10 @@ module.exports = {
   ],
   theme: {
     extend: {
-   
+      backgroundImage: {
+        'my_bg_image' : "url('../public/img/2.jpg')",
+        
+      }
     },
   },
   plugins: [],
