@@ -105,7 +105,9 @@ function registerPage() {
                  {success && ( 
                         <div className='bg-green-300 w-fit text-sm text-white py-1 px-3 rounded-md mt-2 mx-auto'>{success}</div>
                     )}
-                <input onChange={(e) => setEmail(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="email" placeholder='Enter your Email' />
+                <input onChange={(e) => setPassword(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="email" placeholder='Enter your Email' />
+                <input onChange={(e) => setConfimrepassword(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="email" placeholder='Enter your Email' />
+              
                 <div >
                   <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Confirm</button>
                 </div>
