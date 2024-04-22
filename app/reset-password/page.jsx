@@ -95,7 +95,7 @@ function registerPage() {
         <Navbar/>
         <div className='container mx-auto py-10 items-center flex-col'>
           <div className='text-center items-center'>
-             <h2 className='text-4xl' >Forget Password</h2>
+             <h2 className='text-4xl' >Reset Password</h2>
             <hr />
             <form onSubmit={handleSubmit}>
 

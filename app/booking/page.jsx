@@ -6,7 +6,12 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useState }from 'react'
 import { redirect } from 'next/navigation'
+
+
+
 export default function BookingPage() {
+
+
 
   const [id, setId] = useState("");
   const [day, setDay] = useState("date");
@@ -23,6 +28,10 @@ export default function BookingPage() {
   const handleSubmit = async (e) => {
         
     e.preventDefault();
+
+
+
+
       try{                                       // API เป็นการยิง ข้อมูลไปที่ api/register/route
                           
               const res = await fetch("api/booking",{
