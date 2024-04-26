@@ -1,21 +1,27 @@
 "use client"
 import Link from 'next/link'
-import React, { useState , useEffect }from 'react'
-import Navbar from '../components/Navbar'
+import React, { useEffect, useState }from 'react'
+import Navbar from '@/app/components/Navbar'
+//  import Navbar from '../components/Navbar.jsx'
 import { signIn } from 'next-auth/react'
 import {useRouter} from 'next/navigation'
 import emailjs from '@emailjs/browser'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 
-function registerPage() {
+
+
+
+function ResetPassword({params}) {
+ 
   const [password, setPassword] = useState("");
   
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [verifyToken, setVerifyToken] = useState("");
+  
+  const [user, setUser ] = useState(null);
 
   const router = useRouter();
   const {data: session } = useSession("");
@@ -40,6 +46,7 @@ function registerPage() {
                 setError("");
                 setVerifyToken("Token complete")
                 const userData = await res.json();
+                setUser(userData);
                 form.reset();
            
     
@@ -54,7 +61,6 @@ function registerPage() {
     })
    
     
- 
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,17 +78,17 @@ function registerPage() {
 
 
    
-    try{                                       // API เป็นการยิง ข้อมูลไปที่ api/register/route
-      
-      
+    try{           
+           
         const res = await fetch("api/reset-password",{
             method: "POST",
             headers: {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-                password, email
-            })
+                password, 
+                email: user?.email
+            }),
         })
 
         
@@ -96,8 +102,12 @@ function registerPage() {
 
         } else {
             console.log("Reset  failed")
+            setError("Error");
+          
           
         }
+
+
 
     }catch(error){
         console.log("Error during reset", error);
@@ -108,7 +118,7 @@ function registerPage() {
 
   return (
     <div>
-        <Navbar/>
+         <Navbar/>
         <div className='container mx-auto py-10 items-center flex-col'>
           <div className='text-center items-center'>
              <h2 className='text-4xl' >Reset Password</h2>
@@ -137,4 +147,4 @@ function registerPage() {
   )
 }
 
-export default registerPage
+export default ResetPassword
