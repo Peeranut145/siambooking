@@ -4,7 +4,7 @@ import User from "@/models/user";
 import bcrypt from 'bcryptjs';
 import CountModel from "@/models/count";
 import crypto from "crypto";
-
+import emailjs from '@emailjs/browser'
 
 export async function POST(req) {
     
@@ -14,28 +14,44 @@ export async function POST(req) {
    
 
         await connectMongoDB();
+        
+        
+
        
-       
-        const existingUser = await User.findOne({ email }).select("email");
+        const existingUser = await User.findOne({ email });
         if ( !existingUser ){
             return NextResponse.json({ message: "Email Don't exist." }, { status: 201 });
         }
-
+        existingUser.resetToken = crypto.randomBytes(20).toString("hex");
+        existingUser.resetTokenExpiry =  Date.now() + 3600000;
         console.log(existingUser);
-        const resetToken = crypto.randomBytes(20).toString("hex");
-        const passwordResetToken = crypto
-            .createHash("sha256")
-            .update(resetToken)
-            .digest("hex")
 
-        const passwordResetExpires = Data.new() + 3600000;
+        const token = await User.findOne({email}).select(resetToken);
+        const serviceId = 'service_x1gxzek';
+        const templeteId = 'template_89b5tlt';
+        const publicKey = 'EKTWbI9COdZ2EtyX9';
 
-        existingUser.resetToken = passwordResetToken;
-        existingUser.resetTokenExpiry = passwordResetExpires;
-        const resetUrl = 'localhost:3000/reset-password/${resetToken}';
+        const templateParams = {
+            
+            from_email: email,existingUser,token,
+            message: ''
+            
+         }
 
-        console.log(resetUrl);
-        return NextResponse.json({ message: "User registered." }, { status: 201 });
+         emailjs.send(serviceId, templeteId, templateParams, publicKey)
+         .then((response) => {
+             console.log("Email sent successfully", response);
+             setSuccess("Send to Reset");
+
+          })
+         .catch((error) => {
+            console.log('Error sending email',error)
+            setError("Reset  failed");
+         })
+
+
+       await   existingUser.save();
+         return NextResponse.json({ message: "User registered." }, { status: 201 });
     }
     catch (error) {
         return NextResponse.json({ message: "An error occured while registrating the user" }, { status: 500 });

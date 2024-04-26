@@ -27,7 +27,7 @@ function registerPage() {
           email, password, redirect: false
         })
         if (res.error) {
-          setError("Invalid credentials.");
+          setError("Invalid,  Please your check Username or Password is incorrect.");
           return;
         }
         router.replace("welcome")  //link page

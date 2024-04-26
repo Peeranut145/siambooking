@@ -74,6 +74,7 @@ function registerPage() {
         if (res.ok) {
             const form = e.target;
             setError("");
+            setSuccess("ok")
          
             form.reset();
        

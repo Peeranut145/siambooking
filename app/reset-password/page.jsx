@@ -1,80 +1,96 @@
 "use client"
 import Link from 'next/link'
-import React, { useState }from 'react'
+import React, { useState , useEffect }from 'react'
 import Navbar from '../components/Navbar'
 import { signIn } from 'next-auth/react'
 import {useRouter} from 'next/navigation'
 import emailjs from '@emailjs/browser'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+
 function registerPage() {
-  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [verifyToken, setVerifyToken] = useState("");
 
   const router = useRouter();
   const {data: session } = useSession("");
     if ( session ) router.replace("booking");
+
+
+    useEffect (() => {
+    const verifyToken = async () =>{
+        try{
+            const res = await fetch("api/verify-token", {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    token: param.token,
+                })
+
+            })
+            if (res.ok) {
+                const form = e.target;
+                setError("");
+                setVerifyToken("Token complete")
+                const userData = await res.json();
+                form.reset();
+           
+    
+            } else {
+                console.log("Token  failed")
+              
+            }
+        }catch(error){
+            console.log("Error during reset", error);
+        }
+      }
+    })
+   
     
  
  
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-
-
-
-    const IsValidEmail = (e) => {
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        return emailRegex.test(email);
-    };
-    if ( !IsValidEmail(email) ){
-        setError("Email is not invalid, Example : admin145@domain.org");
+    if (!password || !confirmPassword){
+        setError("Please complete all inputs !");
         return;
-
     }
+
+    if(password != confirmPassword){
+        setError("Password is not macth !");
+        return;
+    }
+
+
+
+   
     try{                                       // API เป็นการยิง ข้อมูลไปที่ api/register/route
       
       
-        const res = await fetch("api/forget-password",{
+        const res = await fetch("api/reset-password",{
             method: "POST",
             headers: {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-                email
+                password, email
             })
         })
 
         
-        const serviceId = 'service_x1gxzek';
-        const templeteId = 'template_89b5tlt';
-        const publicKey = 'EKTWbI9COdZ2EtyX9';
-
-        const templateParams = {
-            
-            from_email: email,
-            message: ''
-            
-         }
-
-         emailjs.send(serviceId, templeteId, templateParams, publicKey)
-         .then((response) => {
-             console.log("Email sent successfully", response);
-             setSuccess("Send to Reset");
-
-          })
-         .catch((error) => {
-            console.log('Error sending email',error)
-            setError("Reset  failed");
-         })
-
-
+     
         if (res.ok) {
             const form = e.target;
             setError("");
-         
+            setSuccess("Reset complete")
             form.reset();
        
 
@@ -105,8 +121,8 @@ function registerPage() {
                  {success && ( 
                         <div className='bg-green-300 w-fit text-sm text-white py-1 px-3 rounded-md mt-2 mx-auto'>{success}</div>
                     )}
-                <input onChange={(e) => setPassword(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="email" placeholder='Enter your Email' />
-                <input onChange={(e) => setConfimrepassword(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="email" placeholder='Enter your Email' />
+                <input onChange={(e) => setPassword(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="password" placeholder='Enter your new password' />
+                <input onChange={(e) => setConfirmPassword(e.target.value)}  className='block bg-gray-300 p-2 my-2 mx-auto rounded-md ' type="password" placeholder='Enter your confirm new password' />
               
                 <div >
                   <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Confirm</button>

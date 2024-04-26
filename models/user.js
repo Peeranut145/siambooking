@@ -27,11 +27,11 @@ const  userSchema = new Schema (
         },
         resetToken: {
             type: String,
-            required: false,
+            required: true,
         },
         resetTokenExpiry: {
             type: Date,
-            required: false,
+            required: true,
         },
     },
     {timestamps: true}
