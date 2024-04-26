@@ -9,12 +9,20 @@ import emailjs from '@emailjs/browser'
 export async function POST(req) {
     
     try {
-        const { email } = await req.json(); //ประกาศค่าตัวแปล โดย รับค่าจาก req ที่ยิงมาเป็นไฟลื json
+        const { email , resetToken} = await req.json(); //ประกาศค่าตัวแปล โดย รับค่าจาก req ที่ยิงมาเป็นไฟลื json
         
    
 
         await connectMongoDB();
         
+        const reToken = await User.findOne({email}).select(resetToken);
+        if(!reToken){
+            return NextResponse.json({message: "Token error" }, {status: 201});
+        }
+
+        const user = await User.findOne({ email }).select("_id");
+        console.log("User", user);
+
         
 
        
@@ -26,34 +34,25 @@ export async function POST(req) {
         existingUser.resetTokenExpiry =  Date.now() + 3600000;
         console.log(existingUser);
 
-        const token = await User.findOne({email}).select(resetToken);
-        const serviceId = 'service_x1gxzek';
-        const templeteId = 'template_89b5tlt';
-        const publicKey = 'EKTWbI9COdZ2EtyX9';
 
-        const templateParams = {
-            
-            from_email: email,existingUser,token,
-            message: ''
-            
-         }
+       
+        const resetUrl = `https://siambooking.vercel.app/reset-password/${existingUser.resetToken}`;
+        console.log(resetUrl);
+      
 
-         emailjs.send(serviceId, templeteId, templateParams, publicKey)
-         .then((response) => {
-             console.log("Email sent successfully", response);
-             setSuccess("Send to Reset");
-
-          })
-         .catch((error) => {
-            console.log('Error sending email',error)
-            setError("Reset  failed");
-         })
-
-
-       await   existingUser.save();
-         return NextResponse.json({ message: "User registered." }, { status: 201 });
+         await   existingUser.save();
+         
+       
+    
+     
+         return NextResponse.json({ message: "User registered.", user }, { status: 201 });
+         
     }
     catch (error) {
+        existingUser.resetToken = undefined;
+        existingUser.resetTokenExpiry =  undefined;
+        await existingUser.save();
+        
         return NextResponse.json({ message: "An error occured while registrating the user" }, { status: 500 });
     }
 }

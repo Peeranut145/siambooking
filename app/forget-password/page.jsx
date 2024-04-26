@@ -46,35 +46,38 @@ function registerPage() {
                 email
             })
         })
-
         
+        const res2 = await fetch("api/checkemailresetpassword",{
+          method: "POST",
+          headers: {
+              "Content-Type" : "application/json"
+          },
+          body: JSON.stringify({
+              email
+          })
+      })
+      const { user } = await res2.json();
+      if (!user) {
+        setError("The user for this email address was not found. !");
+        return;
+    }
+
+
         const serviceId = 'service_x1gxzek';
         const templeteId = 'template_89b5tlt';
         const publicKey = 'EKTWbI9COdZ2EtyX9';
-
         const templateParams = {
-            
+           
             from_email: email,
-            message: ''
-            
-         }
-
+          }
+ 
          emailjs.send(serviceId, templeteId, templateParams, publicKey)
-         .then((response) => {
-             console.log("Email sent successfully", response);
-             setSuccess("Send to Reset");
-
-          })
-         .catch((error) => {
-            console.log('Error sending email',error)
-            setError("Reset  failed");
-         })
-
-
+ 
+        
         if (res.ok) {
             const form = e.target;
             setError("");
-            setSuccess("ok")
+            setSuccess("Success Message  to  Email")
          
             form.reset();
        
