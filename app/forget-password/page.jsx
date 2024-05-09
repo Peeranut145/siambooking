@@ -12,6 +12,7 @@ function registerPage() {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [token, settoken] = useState("");
 
   const router = useRouter();
   const {data: session } = useSession("");
@@ -43,7 +44,7 @@ function registerPage() {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-                email
+                email, token
             })
         })
         
@@ -62,12 +63,12 @@ function registerPage() {
         return;
     }
 
-
+        
         const serviceId = 'service_x1gxzek';
         const templeteId = 'template_89b5tlt';
         const publicKey = 'EKTWbI9COdZ2EtyX9';
         const templateParams = {
-           
+            from_user: token,
             from_email: email,
           }
  

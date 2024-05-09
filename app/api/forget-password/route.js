@@ -19,7 +19,7 @@ export async function POST(req) {
         if(!reToken){
             return NextResponse.json({message: "Token error" }, {status: 201});
         }
-
+        console.log(reToken);
         const user = await User.findOne({ email }).select("_id");
         console.log("User", user);
 
@@ -45,7 +45,7 @@ export async function POST(req) {
        
     
      
-         return NextResponse.json({ message: "User registered.", user }, { status: 201 });
+         return NextResponse.json({ resetToken }, { status: 201 });
          
     }
     catch (error) {
