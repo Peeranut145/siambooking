@@ -77,7 +77,7 @@ function registerPage() {
                       name, email, password, numbers
                 })
             })
-
+            console.log(res);
             if (res.ok) {
                 const form = e.target;
                 setError("");
@@ -86,8 +86,7 @@ function registerPage() {
            
 
             } else {
-                console.log("User registration failed")
-                setError("User registration failed");
+                  setError("User registration failed3");
             }
 
         }catch(error){

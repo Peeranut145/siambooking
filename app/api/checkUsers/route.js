@@ -9,7 +9,7 @@ export async function POST(req){    //รับค่าที่ยิงมา
         const { email } = await req.json();
         const user = await User.findOne({ email }).select("_id");
         console.log("User", user);
-
+        console.log(email);
         return NextResponse.json({ user });
         
     }

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import bcrypt from 'bcryptjs';
-import CountModel from "@/models/count";
+
 import { data } from "autoprefixer";
 
 
@@ -13,23 +13,13 @@ export async function POST(req) {
         
         const hashedPassword = await bcrypt.hash(password, 10);
         await connectMongoDB();
-        // async function createUser() {
-        //     let countDoc = await CountModel.findOne();
-
-        //     if ( !countDoc ) {
-        //         countDoc = new CountModel();
-        //     }
-        //     countDoc.count++;
-        //     await countDoc.save();
-
-        //     let countUser = new User({ ...data,id: countDoc.count });
-        //     await countUser.save();
-        //     return countUser;
-        // }   
        
-       
-      
-       
+        
+        
+        console.log(name);
+        console.log(email);
+        console.log(password);
+        console.log(numbers);
         await User.create({   name, email, password: hashedPassword, numbers });
 
 

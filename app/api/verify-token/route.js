@@ -16,7 +16,7 @@ export async function POST(req){    //รับค่าที่ยิงมา
             resetTokenExpiry: { $gt: Date.now()}
         })
 
-        if(user)
+        if(!user)
         {
             return new NextResponse("Invaid token or has expire", {status: 400})
         }
