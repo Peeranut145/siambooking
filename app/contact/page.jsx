@@ -3,13 +3,18 @@ import Link from 'next/link'
 import React, { useState }from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/footer'
+import { redirect } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 function contact() {
-
+  const { data: session } = useSession();
+  console.log(session);
+  
+ 
 
 
   return (
     <div>
-        <Navbar/>
+        <Navbar session={session}/>
        <div  className="bg-my_bg_image2  bg-[length:1400px_750px] bg-center " >
             <div className='container mx-auto py-40'>
             <div className='text-center items-center'>
