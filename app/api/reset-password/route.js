@@ -9,8 +9,7 @@ export async function POST(req){    //รับค่าที่ยิงมา
     try {
         
         const { password, email } = await req.json();
-        console.log(email);
-
+       
         await connectMongoDB();
         const exitngUser = await User.findOne({email});
         const hashedPassword = await bcrypt.hash(password, 10);

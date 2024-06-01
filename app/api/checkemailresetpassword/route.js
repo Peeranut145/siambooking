@@ -7,8 +7,13 @@ export async function POST(req){    //รับค่าที่ยิงมา
     try {
         await connectMongoDB();
         const { email } = await req.json();
-        const user = await User.findOne({ email }).select("_id");
+        const user = await User.findOne({ email }).select("resetToken");
         console.log("User", user);
+       
+        
+
+    
+        
 
         return NextResponse.json({ user });
         

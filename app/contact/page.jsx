@@ -15,8 +15,8 @@ function contact() {
   return (
     <div>
         <Navbar session={session}/>
-       <div  className="bg-my_bg_image2  bg-[length:1400px_750px] bg-center " >
-            <div className='container mx-auto py-40'>
+       <div  className="bg-my_bg_image2  bg-[length:1600px_750px] bg-center " >
+            <div className='container mx-auto py-48'>
             <div className='text-center items-center'>
                 <h2 className='text-4xl my-7 text-white'>Contact Admin</h2>
                 <hr />

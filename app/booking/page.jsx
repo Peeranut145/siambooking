@@ -85,6 +85,9 @@ export default function BookingPage() {
                     <input onChange={(e) => setChild(e.target.value)}className='block bg-gray-300 p-2 my-2 rounded-md' type="number" placeholder='Confirm  your Child' />
                     
                     <button type='submit' className='bg-green-500 p-2 rounded-md text-white'>Comfirm Booking</button>
+            <br></br>        
+            <button  className='bg-blue-500 p-2 rounded-md text-white'>  <Link href={'/Product'}>go to Product</Link></button>
+          
                 </form>
                 <hr className='my-3' />
                 </div>            

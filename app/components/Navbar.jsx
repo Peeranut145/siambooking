@@ -16,10 +16,23 @@ export default function Navbar({session}) {
                         <>
                             <li className='mx-3'><Link href="/login">Sign In</Link></li>
                             <li className='mx-3'><Link href="/register">Sign Up</Link></li>
+                            
                         </>
-                    ) : (
+                    ) :           
+                    
+                   (
+                    <>
+                    <Link href="/" className='mx-2'>Dashborad</Link>
+                    <Link href="/" className='mx-2'>Schude</Link>
+                    <Link href="/" className='mx-2'>Avalable</Link>
+                    <Link href="/Product" className='mx-2'>Product</Link>
                     <li className='mx-3'><a onClick={() => signOut()} className='bg-red-500 text-white py-2 px-3 rounded-md text-lg my-2'>Logout</a></li>
-                    )}
+                 
+                    </>
+                )
+                 
+                
+                    }
                 </ul>
             </div>
 

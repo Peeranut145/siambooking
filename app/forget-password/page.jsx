@@ -1,19 +1,19 @@
 "use client"
 import Link from 'next/link'
-import React, { useState }from 'react'
+
 import Navbar from '../components/Navbar'
 import { signIn } from 'next-auth/react'
 import {useRouter} from 'next/navigation'
 import emailjs from '@emailjs/browser'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
+import { useState, userEffect} from 'react';
 function registerPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [token, settoken] = useState("");
-
+  const [token, setToken] = useState("");
   const router = useRouter();
   const {data: session } = useSession("");
     if ( session ) router.replace("booking");
@@ -21,8 +21,9 @@ function registerPage() {
  
  
   const handleSubmit = async (e) => {
+   
     e.preventDefault();
-    
+   
 
 
 
@@ -35,7 +36,29 @@ function registerPage() {
         return;
 
     }
+    const serviceId = 'service_x1gxzek';
+      const templeteId = 'template_89b5tlt';
+      const publicKey = 'EKTWbI9COdZ2EtyX9';
+      const templateParams = {
+       
+           from_email: email,
+  
+    }
+    
+      emailjs.send(serviceId, templeteId, templateParams, publicKey);
     try{                                       // API เป็นการยิง ข้อมูลไปที่ api/register/route
+
+      
+        // async function fetchData(){
+        //   const res3 = await fetch("api/getData");
+        //   const newData = await res3.json();
+        //   setToken(newData);
+        
+        // }
+        // fetchData();
+        
+        
+    
       
       
         const res = await fetch("api/forget-password",{
@@ -44,54 +67,56 @@ function registerPage() {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-                email, token
+                email
             })
         })
         
-        const res2 = await fetch("api/checkemailresetpassword",{
-          method: "POST",
-          headers: {
-              "Content-Type" : "application/json"
-          },
-          body: JSON.stringify({
-              email
-          })
-      })
-      const { user } = await res2.json();
-      if (!user) {
-        setError("The user for this email address was not found. !");
-        return;
-    }
+      //    const res2 = await fetch("api/checkemailresetpassword",{
+      //     method: "POST",
+      //      headers: {
+      //          "Content-Type" : "application/json"
+      //      },
+      //      body: JSON.stringify({
+      //          email
+      //     })
+      //  })
 
-        
-        const serviceId = 'service_x1gxzek';
-        const templeteId = 'template_89b5tlt';
-        const publicKey = 'EKTWbI9COdZ2EtyX9';
-        const templateParams = {
-            from_user: token,
-            from_email: email,
-          }
- 
-         emailjs.send(serviceId, templeteId, templateParams, publicKey)
- 
+      const serviceId = 'service_x1gxzek';
+      const templeteId = 'template_89b5tlt';
+      const publicKey = 'EKTWbI9COdZ2EtyX9';
+      const templateParams = {
+       
+           from_email: email,
+  
+    }
+    
+      emailjs.send(serviceId, templeteId, templateParams, publicKey);
+  
+  
+          
         
         if (res.ok) {
-            const form = e.target;
+             const form = e.target;
             setError("");
             setSuccess("Success Message  to  Email")
-         
             form.reset();
-       
+           
 
         } else {
             console.log("Reset  failed")
           
         }
+     
+       
+    
+
 
     }catch(error){
         console.log("Error during reset", error);
     }
-  }
+    
+  }     
+
 
 
 

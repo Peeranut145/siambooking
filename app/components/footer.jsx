@@ -5,9 +5,9 @@ import Link from 'next/link'
 export default function Navbar({session}) {
   return (
     <nav className="h-23 bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-7">
-        <div className="container mx-auto ">
+        <div className="container  my-auto ">
             
-            <div className="flex justify-between item-center">
+            <div className="flex justify-between item-center ">
                 <div>
                     <Link href = "../contact">Contact</Link>
                 </div>
